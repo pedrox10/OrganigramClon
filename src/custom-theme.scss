@@ -1,0 +1,118 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+// PALETAS PERSONALIZADAS
+$primary-palette: mat.define-palette(mat.$teal-palette, 600);
+$accent-palette: mat.define-palette(mat.$cyan-palette, A200);
+$warn-palette: mat.define-palette(mat.$red-palette);
+
+// TEMA OSCURO
+$OrganigramClon-theme: mat.define-dark-theme((
+  color: (
+    primary: $primary-palette,
+    accent: $accent-palette,
+    warn: $warn-palette,
+  ),
+  typography: mat.define-typography-config(),
+  density: 0
+));
+
+// APLICAR TEMA A TODOS LOS COMPONENTES
+@include mat.all-component-themes($OrganigramClon-theme);
+
+// ----------------------
+// ESTILOS PERSONALIZADOS
+// ----------------------
+
+// Fondo general
+body {
+  background: linear-gradient(90deg, #00313a, #005a65);
+  margin: 0;
+  font-family: Roboto, sans-serif;
+}
+
+// SIDEBAR
+.sidenav-container {
+  height: 100vh;
+}
+
+mat-sidenav {
+  background: #0a1f2b !important;
+  color: white !important;
+  width: 260px !important;
+}
+
+mat-nav-list a {
+  color: #d0d0d0 !important;
+  font-size: 15px;
+}
+
+mat-nav-list a.active {
+  background: rgba(255,255,255,0.12);
+}
+
+// TOOLBAR
+mat-toolbar {
+  background: #006c75 !important;
+  color: white !important;
+}
+
+// TABLA
+.mat-mdc-table {
+  background-color: #3a3a3a !important;
+  color: #e0e0e0 !important;
+}
+
+.mat-mdc-header-cell {
+  color: #bcbcbc !important;
+}
+
+.mat-mdc-row:hover {
+  background: rgba(255,255,255,0.08) !important;
+}
+
+// CHIP ESTADO ACTIVO
+.estado-activo {
+  background: #2abd2a !important;
+  color: white !important;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+// CHIP EVENTUAL
+.estado-eventual {
+  color: #64b5f6 !important;
+}
+
+// CHIP ITEM
+.estado-item {
+  color: #00e8c5 !important;
+}
+
+// INPUTS
+mat-form-field {
+  width: 100%;
+}
+
+mat-form-field .mdc-text-field {
+  background: #2b2b2b !important;
+  color: white !important;
+}
+
+// ICONOS
+mat-icon {
+  color: #eeeeee !important;
+}
+
+// BOTÓN DE MENÚ (los tres puntos)
+.menu-button {
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 4px;
+
+  &:hover {
+    background: rgba(255,255,255,0.12);
+  }
+}

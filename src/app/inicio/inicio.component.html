@@ -1,0 +1,71 @@
+<div class="layout">
+
+  <div id="sidebar" class="sidebar">
+
+    <div class="sidebar-toggle" (click)="toggleSidebar()">
+      <mat-icon>menu</mat-icon>
+      <span class="sidebar-text">MiOrganigrama</span>
+    </div>
+
+    <div class="sidebar-item">
+      <mat-icon>inbox</mat-icon>
+      <span class="sidebar-text">Bandeja</span>
+    </div>
+
+    <div class="sidebar-item" routerLink="funcionarios">
+      <mat-icon>group</mat-icon>
+      <span class="sidebar-text">Personal</span>
+    </div>
+
+    <div class="sidebar-item">
+      <mat-icon>assignment</mat-icon>
+      <span class="sidebar-text">Cargos</span>
+    </div>
+
+    <div class="sidebar-item">
+      <mat-icon>layers</mat-icon>
+      <span class="sidebar-text">Niveles</span>
+    </div>
+
+    <div class="sidebar-item">
+      <mat-icon>star</mat-icon>
+      <span class="sidebar-text">Partidas</span>
+    </div>
+
+    <div class="sidebar-item">
+      <mat-icon>emergency</mat-icon>
+      <span class="sidebar-text">Unidades</span>
+    </div>
+
+    <div class="sidebar-item">
+      <mat-icon>account_tree</mat-icon>
+      <span class="sidebar-text">Dependencias</span>
+    </div>
+
+    <div class="sidebar-item">
+      <mat-icon>folder</mat-icon>
+      <span class="sidebar-text">Registros</span>
+    </div>
+
+    <div class="sidebar-item">
+      <mat-icon>list_alt</mat-icon>
+      <span class="sidebar-text">Solicitudes</span>
+    </div>
+
+    <div class="sidebar-item" routerLink="organigrama">
+      <mat-icon>api</mat-icon>
+      <span class="sidebar-text">Organigrama</span>
+    </div>
+
+    <div class="sidebar-item">
+      <mat-icon>logout</mat-icon>
+      <span class="sidebar-text">Cerrar sesión</span>
+    </div>
+
+  </div>
+
+  <div class="contenido">
+    <router-outlet></router-outlet>
+  </div>
+
+</div>

@@ -1,0 +1,44 @@
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+
+.title {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+
+.filter {
+  width: 260px;
+}
+}
+}
+
+.card-container {
+  padding: 0;
+
+table {
+  width: 100%;
+}
+}
+
+.badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+
+&.activo {
+   background-color: #4caf50;
+ }
+
+&.inactivo {
+   background-color: #f44336;
+ }
+}

@@ -1,0 +1,77 @@
+/* ====== LAYOUT GENERAL ====== */
+.layout {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  background: #0a1a2a;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+/* ====== SIDEBAR ====== */
+.sidebar {
+  width: 200px;
+  background: linear-gradient(to bottom, #00354f, #001a2e);
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  transition: width 0.25s ease;
+}
+
+/* Sidebar colapsado */
+.sidebar.collapsed {
+  width: 85px;
+}
+
+/* ====== ÍTEM DEL MENÚ ====== */
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 15px;
+  color: #fff;
+  opacity: 0.95;
+  border-radius: 6px;
+  margin: 4px 10px;
+  white-space: nowrap; /* Evita salto de línea */
+}
+
+.sidebar-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Ocultar texto cuando está colapsado */
+.sidebar.collapsed .sidebar-text {
+  display: none;
+}
+
+/* Centrar iconos cuando está colapsado */
+.sidebar.collapsed .sidebar-item {
+  justify-content: center;
+}
+
+/* ====== BOTÓN HAMBURGER ====== */
+.sidebar-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.sidebar-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ====== CONTENIDO ====== */
+.contenido {
+  flex: 1;
+  padding: 20px;
+  background: #0e2037;
+}

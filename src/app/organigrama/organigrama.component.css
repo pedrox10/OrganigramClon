@@ -2,17 +2,15 @@
 #organigrama-container {
   flex: 1;
   overflow: hidden;
-  border: 1px solid #ddd;
   position: relative;
   height: 100vh;
 }
-
 /* Contenedor interno para zoom y pan */
 .organigrama-wrapper {
   transform-origin: 0 0;
-  height: 100%;
+  width: 100vw;
+  height: 400px;
 }
-
 /* estilos de nodos */
 .mi-nodo {
   width: 180px;

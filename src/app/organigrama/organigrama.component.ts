@@ -70,24 +70,19 @@ export class OrganigramaComponent implements AfterViewInit {
 
   buscarNodo(texto: string) {
     const nodes = Array.from(document.querySelectorAll('.node')) as HTMLElement[];
-
     // Limpiar resaltado previo
     nodes.forEach(n => n.classList.remove('highlight'));
 
     if (!texto.trim()) return;
-
     const coincidencias: HTMLElement[] = [];
-
     nodes.forEach(n => {
       const name = n.querySelector('.node-name')?.textContent?.toLowerCase();
       const title = n.querySelector('.node-title')?.textContent?.toLowerCase();
 
       if (name?.includes(texto.toLowerCase()) || title?.includes(texto.toLowerCase())) {
         n.classList.add('highlight');
-
         // Abrir los nodos padres de cada coincidencia
         this.expandirAncestros(n);
-
         coincidencias.push(n);
       }
     });
@@ -99,17 +94,24 @@ export class OrganigramaComponent implements AfterViewInit {
 
   expandirAncestros(node: HTMLElement) {
     let actual: HTMLElement | null = node;
-
     while (actual) {
       const toggle = actual.querySelector('.collapse-switch') as HTMLElement;
-
       // Si el nodo está colapsado, simular un clic
       if (toggle && toggle.classList.contains('collapsed')) {
         toggle.click();
       }
-
       actual = actual.parentElement as HTMLElement;
     }
+  }
+
+  centrarPrimero() {
+    const cont = document.getElementById('organigrama-container');
+    if (!cont) return;
+    cont.scrollTo({
+      left: 200,
+      top: 100,
+      behavior: "smooth"
+    });
   }
 
   centrarEnNodo(node: HTMLElement) {
@@ -118,10 +120,9 @@ export class OrganigramaComponent implements AfterViewInit {
 
     const rect = node.getBoundingClientRect();
     const crect = cont.getBoundingClientRect();
-
+    console.log(crect)
     const x = rect.left - crect.left + cont.scrollLeft - cont.clientWidth / 2 + rect.width / 2;
     const y = rect.top - crect.top + cont.scrollTop - cont.clientHeight / 2 + rect.height / 2;
-
     cont.scrollTo({
       left: x,
       top: y,
@@ -155,7 +156,6 @@ export class OrganigramaComponent implements AfterViewInit {
       this.lastY = e.clientY;
       container.style.transform = `scale(${this.zoom}) translate(${this.posX}px, ${this.posY}px)`;
     });
-
     window.addEventListener('mouseup', () => this.dragging = false);
   }
 }

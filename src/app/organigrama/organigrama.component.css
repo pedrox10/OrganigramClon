@@ -1,15 +1,21 @@
-
+:root {
+  --sidebar-width: 240px;
+}
 #organigrama-container {
-  flex: 1;
-  overflow: hidden;
-  position: relative;
-  height: 100vh;
+  position: relative;            /* OBLIGATORIO */
+  width: 100%;
+  height: calc(100vh - 200px);     /* O el alto que necesites */
+  overflow: auto !important;
+  background: #0f1b2c;
 }
 /* Contenedor interno para zoom y pan */
 .organigrama-wrapper {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 4000px;
+  height: 4000px;
   transform-origin: 0 0;
-  width: 100vw;
-  height: 400px;
 }
 /* estilos de nodos */
 .mi-nodo {

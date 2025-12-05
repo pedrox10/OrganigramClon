@@ -26,6 +26,10 @@ export class OrganigramaComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.cargarOrganigrama();
+    setTimeout(()=> {
+      const rootNode = document.querySelector("#wrapper .node") as HTMLElement;
+      this.centrarEnNodo(rootNode);
+    }, 900)
     this.activarZoomYPan();
   }
 
@@ -56,6 +60,12 @@ export class OrganigramaComponent implements AfterViewInit {
     const chart_config = {
       chart: {
         container: "#wrapper",
+        callback: {
+          onTreeLoaded: () => {
+            const rootNode = document.querySelector("#wrapper .node") as HTMLElement;
+            this.centrarEnNodo(rootNode);
+          }
+        },
         connectors: {
           type: 'step',
           style: { "stroke-width": 2, "stroke": "#ccc" }
@@ -110,11 +120,12 @@ export class OrganigramaComponent implements AfterViewInit {
     cont.scrollTo({
       left: 200,
       top: 100,
-      behavior: "smooth"
+      behavior: "instant"
     });
   }
 
   centrarEnNodo(node: HTMLElement) {
+    console.log("centrando ...")
     const cont = document.getElementById('organigrama-container');
     if (!cont) return;
 
@@ -157,5 +168,23 @@ export class OrganigramaComponent implements AfterViewInit {
       container.style.transform = `scale(${this.zoom}) translate(${this.posX}px, ${this.posY}px)`;
     });
     window.addEventListener('mouseup', () => this.dragging = false);
+  }
+
+  centerOrganigrama() {
+    const container = document.getElementById('organigrama-container')!;
+    const wrapper = document.getElementById('wrapper')!;
+    const containerRect = container.getBoundingClientRect();
+    const wrapperRect = wrapper.getBoundingClientRect();
+    // tamaño real del organigrama
+    const wrapperWidth = wrapperRect.width;
+    const wrapperHeight = wrapperRect.height;
+    // tamaño visible del contenedor
+    const containerWidth = containerRect.width;
+    const containerHeight = containerRect.height;
+    // calcular el offset para centrarlo
+    const offsetX = (containerWidth - wrapperWidth) / 2;
+    const offsetY = (containerHeight - wrapperHeight) / 2;
+    // Aplicar un translate inicial
+    wrapper.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(1)`;
   }
 }

@@ -62,3 +62,21 @@
   background-color: #71787a !important;
   transition: all 0.2s ease-in-out;
 }
+
+.buscador-container {
+  display: flex;
+  align-items: center !important;        /* 🔥 centra verticalmente */
+  vertical-align: center !important;
+  gap: 10px;           /* separación entre input y botón */
+  width: 100%;
+}
+
+.buscador-input {
+  width: 350px;
+}
+
+.btn-buscar {
+  white-space: nowrap;
+  line-height: 112px;
+}
+

@@ -1,6 +1,8 @@
 import {Component, AfterViewInit, ViewEncapsulation, ElementRef, ViewChild} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {CommonModule} from "@angular/common";
+import {MatInputModule} from "@angular/material/input";
+import {MatButtonModule} from "@angular/material/button";
 
 declare var Treant: any;
 
@@ -8,7 +10,7 @@ declare var Treant: any;
   selector: 'app-organigrama',
   templateUrl: './organigrama.component.html',
   styleUrls: ['./organigrama.component.css'],
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MatInputModule, MatButtonModule],
   standalone: true,
   encapsulation: ViewEncapsulation.None
 })
@@ -41,6 +43,7 @@ export class OrganigramaComponent implements AfterViewInit {
       children: [
         {
           text: { name: "JEFE DE UNIDAD", title: "Ing. ANA RIVERA" },
+          HTMLid: `ana`,
           HTMLclass: "mi-nodo item-nodo",
           children: [
             { text: { name: "TÉCNICO DE REDES", title: "C. LÓPEZ" }, HTMLclass: "mi-nodo contrato-nodo" },
@@ -92,27 +95,62 @@ export class OrganigramaComponent implements AfterViewInit {
       if (name?.includes(texto.toLowerCase()) || title?.includes(texto.toLowerCase())) {
         n.classList.add('highlight');
         // Abrir los nodos padres de cada coincidencia
-        this.expandirAncestros(n);
+        //this.expandirAncestros(n);
+        this.expandirNodo("ana")
         coincidencias.push(n);
       }
     });
     // Centrar solo el primer resultado
     if (coincidencias.length > 0) {
-      this.centrarEnNodo(coincidencias[0]);
+      setTimeout(() => {
+        this.centrarEnNodo(coincidencias[0]);
+      }, 750);
+    }
+  }
+
+  expandirNodo(id: string) {
+    const dom = document.getElementById(id);
+    const toggle = dom?.querySelector(".collapse-switch") as HTMLElement;
+    if (dom?.classList.contains("collapsed")) {
+      toggle?.click();
     }
   }
 
   expandirAncestros(node: HTMLElement) {
-    let actual: HTMLElement | null = node;
-    while (actual) {
-      const toggle = actual.querySelector('.collapse-switch') as HTMLElement;
-      // Si el nodo está colapsado, simular un clic
+    let current: HTMLElement | null = node;
+
+    while (current) {
+
+      const toggle = current.querySelector('.collapse-switch') as HTMLElement | null;
+
+      // Si el toggle existe y está colapsado
       if (toggle && toggle.classList.contains('collapsed')) {
+        console.log("-> Expandir:", current);
         toggle.click();
       }
-      actual = actual.parentElement as HTMLElement;
+
+      // Ahora subimos al padre REAL del organigrama:
+      current = this.obtenerPadreTreant(current);
     }
   }
+
+  obtenerPadreTreant(node: HTMLElement): HTMLElement | null {
+    // El .children de este nodo es su siguiente hermano
+    // El .children del padre es un ancestro que contiene este node
+    const childrenContainer = node.closest('.children');
+
+    if (!childrenContainer) return null;
+
+    // El padre es el nodo inmediatamente anterior al contenedor .children
+    const parentNode = childrenContainer.previousElementSibling;
+
+    if (parentNode?.classList.contains('node')) {
+      return parentNode as HTMLElement;
+    }
+
+    return null;
+  }
+
 
   centrarPrimero() {
     const cont = document.getElementById('organigrama-container');
